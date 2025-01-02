@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <sonar.projectKey>sonar-maven</sonar.projectKey>
+        <sonar.projectKey>sonar-maven2</sonar.projectKey>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
     </properties>
