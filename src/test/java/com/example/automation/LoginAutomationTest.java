@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginAutomationTest {
@@ -13,7 +12,7 @@ public class LoginAutomationTest {
     @Test
     public void testLogin() {
         // Set up the WebDriver
-        System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
         WebDriver driver = new ChromeDriver();
         try {
             // Navigate to the login page
@@ -33,6 +32,7 @@ public class LoginAutomationTest {
             String expectedTitle = "Dashboard";
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle);
+
         } finally {
             // Close the browser
             driver.quit();
