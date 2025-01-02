@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -10,7 +11,6 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.projectKey>sonar-maven2</sonar.projectKey>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
         <sonar.login>${env.SONAR_TOKEN}</sonar.login>
@@ -38,7 +38,7 @@
             <version>4.10.0</version>
         </dependency>
 
-        <!-- JUnit Platform Launcher -->
+        <!-- JUnit Platform Launcher (optional) -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
@@ -57,19 +57,16 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
-            <!-- Surefire Plugin -->
+            <!-- Surefire Plugin for running JUnit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
+                    <useModulePath>false</useModulePath> <!-- For JDK 9+ -->
                 </configuration>
             </plugin>
 
