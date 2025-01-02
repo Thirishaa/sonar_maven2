@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginAutomationTest {
  public void testLogin() {
  // Set up the WebDriver
- System.setProperty("webdriver.chrome.driver", "C:\WebDriver");
+ System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe");
  WebDriver driver = new ChromeDriver();
  try {
  // Navigate to the login page
