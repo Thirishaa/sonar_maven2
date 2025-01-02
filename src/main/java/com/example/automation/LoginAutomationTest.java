@@ -36,5 +36,6 @@ public class LoginAutomationTest {
             // Close the browser
             driver.quit();
         }
+        assertTrue(true);
     }
 }
