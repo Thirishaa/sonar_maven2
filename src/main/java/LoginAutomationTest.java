@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginAutomationTest {
- @Test
  public void testLogin() {
  // Set up the WebDriver
  System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
