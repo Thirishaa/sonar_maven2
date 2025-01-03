@@ -5,6 +5,8 @@ pipeline {
     }
     environment {
         SONAR_TOKEN = credentials('sonar-token') // Replace with your credentials ID for the SonarQube token
+        CHROME_DRIVER_PATH = 'C:\\Users\\thirishaa\\Downloads\\chromedriver-win64\\chromedriver-win64'
+
 
     }
     stages {
