@@ -31,6 +31,7 @@ pipeline {
                         -Dsonar.projectKey=sonar-maven2 
                         -Dsonar.sources=src/main/java 
                         -Dsonar.tests=src/test/java 
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
                         -Dsonar.host.url=http://localhost:9000 
                         -Dsonar.login=%SONAR_TOKEN%
                     """
