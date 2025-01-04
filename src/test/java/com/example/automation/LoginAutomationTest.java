@@ -25,7 +25,7 @@ public class LoginAutomationTest {
     public void testLogin() {
         try {
             // Navigate to the login page
-           driver.get("http://localhost:8083");  
+            driver.get("http://localhost:8083");
 
             // Locate the username and password fields
             WebElement usernameField = driver.findElement(By.id("username"));
@@ -37,10 +37,17 @@ public class LoginAutomationTest {
             passwordField.sendKeys("testPassword");
             loginButton.click();
 
-            // Validate successful login
+            // Wait for the page to load after the login
+            Thread.sleep(1000); // Wait for 1 second (or use WebDriverWait for better synchronization)
+
+            // Validate successful login (check if the title of the page is "Dashboard")
             String expectedTitle = "Dashboard";
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle, "Login test failed: Titles do not match.");
+
+            // Optional: You can also check the page content to ensure it's correct
+            WebElement successMessage = driver.findElement(By.tagName("h1"));
+            assertEquals("Welcome to your Dashboard!", successMessage.getText(), "Login test failed: Unexpected page content.");
         } catch (Exception e) {
             System.err.println("Error during login test: " + e.getMessage());
             throw e;
