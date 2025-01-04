@@ -25,7 +25,7 @@ public class LoginAutomationTest {
     public void testLogin() {
         try {
             // Navigate to the login page
-            driver.get("file:///D:/Worldline/sonar/login.html");
+           driver.get("http://localhost:8083/login");  
 
             // Locate the username and password fields
             WebElement usernameField = driver.findElement(By.id("username"));
