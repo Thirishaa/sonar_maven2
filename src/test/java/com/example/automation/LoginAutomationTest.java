@@ -4,11 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.Duration;
 
 public class LoginAutomationTest {
 
@@ -16,7 +19,7 @@ public class LoginAutomationTest {
 
     @BeforeEach
     public void setUp() {
-        // Set up the WebDriver
+        // Set up the WebDriver (ensure chromedriver is in PATH or specify location)
         System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver.exe"); // Adjust path as needed
         driver = new ChromeDriver();
     }
@@ -37,32 +40,29 @@ public class LoginAutomationTest {
             passwordField.sendKeys("testPassword");
             loginButton.click();
 
-            // Wait for the page to load after the login
-            Thread.sleep(1000); // Wait for 1 second (or use WebDriverWait for better synchronization)
+            // Wait for the page to load after the login (check if it's the Dashboard)
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.titleIs("Dashboard")); // Wait for the dashboard page title
 
-            // Validate successful login (check if the title of the page is "Dashboard")
+            // Validate successful login by checking the page title
             String expectedTitle = "Dashboard";
-            driver.get("file:///C:/webdriver/dashboard.html"); // Local file path to dashboard page
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle, "Login test failed: Titles do not match.");
 
-            // Optional: You can also check the page content to ensure it's correct
+            // Optional: Check the page content to ensure it's correct
             WebElement successMessage = driver.findElement(By.tagName("h1"));
             assertEquals("Welcome to your Dashboard!", successMessage.getText(), "Login test failed: Unexpected page content.");
-        } catch (InterruptedException e) {
-            // Handle interruption during Thread.sleep
-            System.err.println("Thread interrupted: " + e.getMessage());
-            Thread.currentThread().interrupt(); // Preserve interrupt status
         } catch (Exception e) {
-            // Handle other exceptions
+            // Handle any other exceptions
             System.err.println("Error during login test: " + e.getMessage());
-            throw e;
+            e.printStackTrace();
+            throw e; // Re-throw to fail the test
         }
     }
 
     @AfterEach
     public void tearDown() {
-        // Close the browser
+        // Close the browser after each test
         if (driver != null) {
             driver.quit();
         }
