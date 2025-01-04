@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.projectKey>sonar-maven2</sonar.projectKey>
         <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+        <sonar.token>${env.SONAR_TOKEN}</sonar.token>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
@@ -95,6 +95,7 @@
                 <version>0.8.10</version>
                 <executions>
                     <execution>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -107,46 +108,9 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <!-- PMD Maven Plugin for Code Duplication Detection -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.14.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>pmd</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>pmd-pmd</id>
-                        <goals>
-                            <goal>cpd</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <configuration>
-                    <printFailingErrors>true</printFailingErrors>
-                    <rulesets>
-                        <ruleset>rulesets/java/quickstart.xml</ruleset>
-                    </rulesets>
+                    <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
                 </configuration>
-            </plugin>
-
-            <!-- Maven Resources Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-            </plugin>
-
-            <!-- Maven JAR Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
             </plugin>
         </plugins>
     </build>
