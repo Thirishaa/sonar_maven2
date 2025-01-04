@@ -48,7 +48,12 @@ public class LoginAutomationTest {
             // Optional: You can also check the page content to ensure it's correct
             WebElement successMessage = driver.findElement(By.tagName("h1"));
             assertEquals("Welcome to your Dashboard!", successMessage.getText(), "Login test failed: Unexpected page content.");
+        } catch (InterruptedException e) {
+            // Handle interruption during Thread.sleep
+            System.err.println("Thread interrupted: " + e.getMessage());
+            Thread.currentThread().interrupt(); // Preserve interrupt status
         } catch (Exception e) {
+            // Handle other exceptions
             System.err.println("Error during login test: " + e.getMessage());
             throw e;
         }
