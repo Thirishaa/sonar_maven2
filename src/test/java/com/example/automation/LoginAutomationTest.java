@@ -24,8 +24,8 @@ public class LoginAutomationTest {
     @Test
     public void testLogin() {
         try {
-            // Navigate to the login page
-            driver.get("http://localhost:8083");
+            // Navigate to the login page using local file path
+            driver.get("file:///C:/webdriver/index.html"); // Local file path to login page
 
             // Locate the username and password fields
             WebElement usernameField = driver.findElement(By.id("username"));
@@ -42,6 +42,7 @@ public class LoginAutomationTest {
 
             // Validate successful login (check if the title of the page is "Dashboard")
             String expectedTitle = "Dashboard";
+            driver.get("file:///C:/webdriver/dashboard.html"); // Local file path to dashboard page
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle, "Login test failed: Titles do not match.");
 
