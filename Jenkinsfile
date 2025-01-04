@@ -5,7 +5,6 @@ pipeline {
     }
     environment {
         SONAR_TOKEN = credentials('sonar-token') // Replace with your credentials ID for the SonarQube token
-        CHROME_DRIVER_PATH = 'C:\\Users\\thirishaa\\Downloads\\chromedriver-win64\\chromedriver-win64'
     }
     stages {
         stage('Checkout') {
@@ -20,7 +19,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                bat 'mvn test' // Executes the tests using Maven
+                bat 'mvn verify' // Executes tests and generates the JaCoCo coverage report
             }
         }
         stage('SonarQube Analysis') {
@@ -33,7 +32,7 @@ pipeline {
                         -Dsonar.tests=src/test/java 
                         -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
                         -Dsonar.host.url=http://localhost:9000 
-                        -Dsonar.login=%SONAR_TOKEN%
+                        -Dsonar.token=%SONAR_TOKEN%
                     """
                 }
             }
@@ -46,7 +45,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed.'
-            junit '**/target/surefire-reports/*.xml'  // Archive test results if available
+            junit '**/target/surefire-reports/*.xml' // Archive test results if available
         }
     }
 }
