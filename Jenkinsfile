@@ -27,11 +27,11 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') { // Ensure this matches your SonarQube configuration
                     bat """
-                        mvn sonar:sonar &&
-                        -Dsonar.projectKey=sonar-maven2 &&
-                        -Dsonar.sources=src/main/java &&
-                        -Dsonar.tests=src/test/java &&
-                        -Dsonar.host.url=http://localhost:9000 &&
+                        mvn sonar:sonar 
+                        -Dsonar.projectKey=sonar-maven2 
+                        -Dsonar.sources=src/main/java 
+                        -Dsonar.tests=src/test/java 
+                        -Dsonar.host.url=http://localhost:9000 
                         -Dsonar.login=%SONAR_TOKEN%
                     """
                 }
@@ -45,7 +45,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed.'
-            junit '**/target/test-*.xml'  // Archive test results if available
+            junit '**/target/surefire-reports/*.xml'  // Archive test results if available
         }
     }
 }
